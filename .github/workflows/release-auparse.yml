@@ -1,8 +1,5 @@
 name: Release Auparse
 on:
-  push:
-    branches:
-      - 'feature/release'
   workflow_dispatch:
     inputs:
       version:
@@ -26,7 +23,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          tag: 'refs/tags/v${{ inputs.version }}'
+          ref: 'refs/tags/v${{ inputs.version }}'
       - name: Set up Go
         uses: actions/setup-go@v5
         with:
@@ -41,6 +38,8 @@ jobs:
           path: bin/auparse-${{ env.tag }}
   release:
     name: Release
+    permissions:
+      contents: write
     runs-on: ubuntu-latest 
     needs: build
     steps:  
@@ -51,8 +50,8 @@ jobs:
     - name: Release
       uses: softprops/action-gh-release@v2
       with:
-        files: bin/auparse-*
-        name: '${{ inputs.version }}'
-        tag_name: '${{ inputs.version }}'
+        files: bin/**/auparse-*
+        name: 'v${{ inputs.version }}'
+        tag_name: 'v${{ inputs.version }}'
         generate_release_notes: true
         token: '${{ secrets.GITHUB_TOKEN }}'
