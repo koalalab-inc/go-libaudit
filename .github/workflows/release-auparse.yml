@@ -37,7 +37,7 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: auparse
+          name: auparse-${{ env.tag }}
           path: bin/auparse-${{ env.tag }}
   release:
     name: Release
