@@ -32,8 +32,7 @@ jobs:
           go-version: 1.16
       - name: Build
         run: |
-          GOOS="${{ matrix.os }}" GOARCH="${{ matrix.arch }}" \
-          go build cmd/auparse/auparse.go -o bin/auparse-"${{ env.tag }}"
+          GOOS="${{ matrix.os }}" GOARCH="${{ matrix.arch }}" go build cmd/auparse/auparse.go -o bin/auparse-"${{ env.tag }}"
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
