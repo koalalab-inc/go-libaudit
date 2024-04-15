@@ -51,7 +51,7 @@ jobs:
       uses: softprops/action-gh-release@v2
       with:
         files: bin/**/auparse-*
-        name: '${{ inputs.version }}'
-        tag_name: '${{ inputs.version }}'
+        name: 'v${{ inputs.version }}'
+        tag_name: 'v${{ inputs.version }}'
         generate_release_notes: true
         token: '${{ secrets.GITHUB_TOKEN }}'
